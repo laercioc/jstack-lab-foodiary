@@ -16,14 +16,14 @@ build:
 
 functions:
   signin:
-    handler: src/signin.handler
+    handler: src/functions/signin.handler
     events:
       - httpApi:
           path: /signin
           method: POST
   
   signUP:
-    handler: src/signup.handler
+    handler: src/functions/signup.handler
     events:
       - httpApi:
           path: /signup

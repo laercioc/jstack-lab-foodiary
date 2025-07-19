@@ -1,0 +1,15 @@
+{
+  "name": "foodiary-api",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.152"
+  },
+  "dependencies": {
+    "typescript": "^5.8.3"
+  }
+}

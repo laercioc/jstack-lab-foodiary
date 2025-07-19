@@ -1,0 +1,10 @@
+import { HttpResponse, HttpRequest } from "../types/Http";
+import { ok } from "../utils/http";
+
+export class SignInController {
+  static async handle(request: HttpRequest): Promise<HttpResponse> {
+    return ok({
+      accessToken: "signin: token de acesso",
+    });
+  }
+}
