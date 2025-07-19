@@ -9,6 +9,6 @@ export function parseEvent(event: APIGatewayProxyEventV2): HttpRequest {
   return {
     body,
     params,
-    queryParams
-  }
+    queryParams,
+  };
 }

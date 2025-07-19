@@ -1,13 +1,15 @@
 service: foodiary-api
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   region: us-east-1
   runtime: nodejs22.x
   architecture: arm64
-
-plugins:
-  - serverless-offline
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
 
 package:
   individually: true
@@ -31,5 +33,3 @@ functions:
       - httpApi:
           path: /signup
           method: POST
-
-
