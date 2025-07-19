@@ -12,7 +12,7 @@ provider:
     DATABASE_URL: ${env:DATABASE_URL}
     JWT_SECRET: ${env:JWT_SECRET}
     BUCKET_NAME: !Ref UploadsBucket
-    MEALS_QUEUE: !Ref MealsQueue
+    MEALS_QUEUE_URL: !Ref MealsQueue
   iam:
     role:
       statements:
@@ -21,8 +21,7 @@ provider:
             - s3:PutObject
           Resource: !Sub '${UploadsBucket.Arn}/*'
         - Effect: Allow
-          Action:
-            - s3:SendMessage
+          Action: sqs:SendMessage
           Resource: !GetAtt MealsQueue.Arn
 
 package:
@@ -78,6 +77,12 @@ functions:
           event: s3:ObjectCreated:*
           existing: true
           forceDeploy: true
+  processMeal:
+    handler: src/functions/processMeal.handler
+    events:
+      - sqs:
+          arn: !GetAtt MealsQueue.Arn
+          batchSize: 1
 
 resources:
   Resources:
@@ -87,7 +92,6 @@ resources:
         BucketName: 'jslab-foodiary'
     MealsQueue:
       Type: AWS::SQS::Queue
-
       Properties:
         QueueName: meals-queue
         VisibilityTimeout: 60

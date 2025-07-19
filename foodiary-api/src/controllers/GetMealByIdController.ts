@@ -10,27 +10,28 @@ const schema = z.object({
 });
 
 export class GetMealByIdController {
-  static async handle({
-    userId,
-    params,
-  }: ProtectedHttpRequest): Promise<HttpResponse> {
+  static async handle({ userId, params }: ProtectedHttpRequest): Promise<HttpResponse> {
     const { success, error, data } = schema.safeParse(params);
-
+    
     if (!success) {
       return badRequest({ errors: error.issues });
     }
 
-    const meals = await db.query.mealsTable.findFirst({
+    const meal = await db.query.mealsTable.findFirst({
       columns: {
         id: true,
         foods: true,
         createdAt: true,
         icon: true,
         name: true,
+        status: true,
       },
-      where: and(eq(mealsTable.id, data.mealId), eq(mealsTable.userId, userId)),
+      where: and(
+        eq(mealsTable.id, data.mealId),
+        eq(mealsTable.userId, userId),
+      ),
     });
 
-    return ok({ meals });
+    return ok({ meal });
   }
 }
