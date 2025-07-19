@@ -10,9 +10,9 @@ export async function handler(event: APIGatewayProxyEventV2) {
     const request = parseProtectedEvent(event);
     const response = await ListMealsController.handle(request);
     return parseResponse(response);
-  } catch (error) {
+  } catch {
     return parseResponse(
-      unauthorized({ error: 'Invalid access token.', errorInterval: error })
+      unauthorized({ error: 'Invalid access token.' })
     );
   }
 }

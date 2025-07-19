@@ -1,22 +1,18 @@
-import { z } from 'zod';
-
 import { and, eq, gte, lte } from 'drizzle-orm';
+import z from 'zod';
 import { db } from '../db';
 import { mealsTable } from '../db/schema';
 import { HttpResponse, ProtectedHttpRequest } from '../types/Http';
 import { badRequest, ok } from '../utils/http';
 
 const schema = z.object({
-  date: z.iso.date().transform((value) => new Date(value)),
+  date: z.iso.date().transform(dateStr => new Date(dateStr)),
 });
 
 export class ListMealsController {
-  static async handle({
-    userId,
-    queryParams,
-  }: ProtectedHttpRequest): Promise<HttpResponse> {
+  static async handle({ userId, queryParams }: ProtectedHttpRequest): Promise<HttpResponse> {
     const { success, error, data } = schema.safeParse(queryParams);
-
+    
     if (!success) {
       return badRequest({ errors: error.issues });
     }
@@ -34,9 +30,9 @@ export class ListMealsController {
       },
       where: and(
         eq(mealsTable.userId, userId),
+        eq(mealsTable.status, 'success'),
         gte(mealsTable.createdAt, data.date),
         lte(mealsTable.createdAt, endDate),
-        eq(mealsTable.status, 'success')
       ),
     });
 
