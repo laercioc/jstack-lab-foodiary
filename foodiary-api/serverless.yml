@@ -6,6 +6,9 @@ provider:
   runtime: nodejs22.x
   architecture: arm64
 
+plugins:
+  - serverless-offline
+
 package:
   individually: true
 
@@ -22,11 +25,11 @@ functions:
           path: /signin
           method: POST
   
-  signUP:
+  signup:
     handler: src/functions/signup.handler
     events:
       - httpApi:
           path: /signup
-          method: get
+          method: POST
 
 

@@ -1,4 +1,4 @@
-import { APIGatewayEvent, APIGatewayProxyEventV2 } from 'aws-lambda';
+import { APIGatewayProxyEventV2 } from 'aws-lambda';
 import { HttpRequest } from '../types/Http';
 
 export function parseEvent(event: APIGatewayProxyEventV2): HttpRequest {
