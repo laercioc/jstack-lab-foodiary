@@ -12,7 +12,7 @@ module.exports = {
         'sans-semibold': ['HostGrotesk_600SemiBold'],
         'sans-bold': ['HostGrotesk_700Bold'],
       },
-      colors: colors
+      colors,
     },
   },
 };
