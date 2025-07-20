@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { HomeHeader } from './components/HomeHeader';
 import './styles/global.css';
+import { DateSwitcher } from './components/DateSwitcher';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,6 +38,7 @@ export default function App() {
     <View className="bg-white flex-1">
       <SafeAreaProvider>
         <HomeHeader/>
+        <DateSwitcher/>
       </SafeAreaProvider>
     </View>
   );
