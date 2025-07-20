@@ -64,7 +64,7 @@ export default function App() {
 
         <View className="h-px bg-gray-200 mt-7" />
 
-        <MealsList/>
+        <MealsList />
       </SafeAreaProvider>
     </View>
   );

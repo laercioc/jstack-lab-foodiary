@@ -8,13 +8,12 @@ export function MealsList() {
         REFEIÇÕES
       </Text>
 
-      <View className='gap-8 mt-4'>
-        <MealCard/>
-        <MealCard/>
-        <MealCard/>
-        <MealCard/>
-        <MealCard/>
-        <MealCard/>
+      <View className="gap-8 mt-4">
+        <MealCard />
+        <MealCard />
+        <MealCard />
+        <MealCard />
+        <MealCard />
       </View>
     </View>
   );
